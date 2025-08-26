@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style/style1.css">
+  <title>评论区</title>
+</head>
+<body>
+<h1 class="basic">评论区</h1>
+<p class="duanluo"><i>历经千辛万苦，我终于做出来了！</i></p>
+  <!-- 简单的评论表单 -->
+<div>
+  <input type="text" id="name-input" placeholder="你的名字">
+  <textarea id="comment-input" placeholder="你的评论"></textarea>
+  <button onclick="submitComment()">提交评论</button>
+</div>
+
+<script>
+async function submitComment() {
+  const name = document.getElementById('name-input').value;
+  const comment = document.getElementById('comment-input').value;
+  
+  // 调用Netlify Function！
+  const response = await fetch('/.netlify/functions/submit-comment', {
+    method: 'POST',
+    body: JSON.stringify({ name, comment })
+  });
+  
+  const result = await response.json();
+  alert(result.message);
+}
+</script>
+</body>
+</html>
