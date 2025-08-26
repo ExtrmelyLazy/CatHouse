@@ -25,3 +25,13 @@ exports.handler = async (event) => {
     };
   }
 };
+// netlify/functions/get-comments.js
+exports.handler = async () => {
+  // 从数据库获取评论
+  const comments = await getCommentsFromDB(); // 伪代码
+  
+  return {
+    statusCode: 200,
+    body: JSON.stringify(comments)
+  };
+};
