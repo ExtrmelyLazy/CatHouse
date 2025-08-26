@@ -31,3 +31,14 @@ a.an {
 /*边框和圆角弄反了呜呜呜*/
 /*因为不知道1像素是多大，大小反反复复调了好几次qwq，但是好像还是很拥挤*/
 /*忘记取消下划线了！*/
+a.ljan {
+  background-color: #34495e;
+  color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  height: 15px;
+  weight: 75px;
+  padding: 8px;
+  text-decoration: none;
+  margin: auto；
+}
