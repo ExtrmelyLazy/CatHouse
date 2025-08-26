@@ -264,7 +264,7 @@
             // 获取并显示评论
             async function loadComments() {
                 try {
-                    const response = await fetch('/.netlify/functions/github-comments');
+                    const response = await fetch('/.netlify/functions/githubcomments');
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -319,7 +319,7 @@
                 submitButton.textContent = '提交中...';
                 
                 try {
-                    const response = await fetch('/.netlify/functions/github-comments', {
+                    const response = await fetch('/.netlify/functions/githubcomments', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
