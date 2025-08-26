@@ -1,0 +1,8 @@
+{
+  "name": "netlify-comments-app",
+  "version": "1.0.0",
+  "description": "A comments system using Netlify Functions and GitHub API",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
