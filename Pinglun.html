@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>班级网站评论板</title>
+    <style>
+        .comment-box {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        #comment-input {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #submit-btn {
+            padding: 8px 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #submit-btn:hover {
+            background: #45a049;
+        }
+        .comment {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f9f9f9;
+            border-left: 3px solid #4CAF50;
+            border-radius: 3px;
+        }
+        .comment-text {
+            margin: 0;
+        }
+        .comment-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="comment-box">
+        <h2>猫窝专属备忘录</h2>
+        <textarea id="comment-input" placeholder="留下你的祝福或想说的话..."></textarea>
+        <button id="submit-btn">许愿</button>
+        <div id="comments-container"></div>
+    </div>
+
+    <script>
+        // 获取元素
+        const commentInput = document.getElementById('comment-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const commentsContainer = document.getElementById('comments-container');
+
+        // 从 localStorage 加载评论
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem('classroom-comments')) || [];
+            commentsContainer.innerHTML = '';
+            comments.forEach(comment => {
+                addCommentToPage(comment.text, comment.timestamp);
+            });
+        }
+
+        // 添加评论到页面
+        function addCommentToPage(text, timestamp) {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.innerHTML = `
+                <p class="comment-text">${text}</p>
+                <div class="comment-info">${new Date(timestamp).toLocaleString()}</div>
+            `;
+            commentsContainer.appendChild(commentDiv);
+        }
+
+        // 发布新评论
+        function addComment() {
+            const text = commentInput.value.trim();
+            if (text === '') return;
+
+            const timestamp = Date.now();
+            const comments = JSON.parse(localStorage.getItem('classroom-comments')) || [];
+            
+            // 添加到数组开头，让新评论显示在最上面
+            comments.unshift({ text, timestamp });
+            
+            // 保存到 localStorage
+            localStorage.setItem('classroom-comments', JSON.stringify(comments));
+            
+            // 更新页面
+            addCommentToPage(text, timestamp);
+            
+            // 清空输入框
+            commentInput.value = '';
+        }
+
+        // 绑定事件
+        submitBtn.addEventListener('click', addComment);
+        commentInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addComment();
+            }
+        });
+
+        // 页面加载时显示评论
+        loadComments();
+    </script>
+</body>
+</html>
