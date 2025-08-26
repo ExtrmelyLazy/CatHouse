@@ -18,14 +18,14 @@ a.an {
   background-color: #4caf50;
   color: #ffffff;
   border: 1px solid: #45a049;
-  border-radius: 8px;
+  border-radius: 20px;
   height: 34px;
   weight: 100px;
   /*这个是内边距呢*/
   padding: 16px;
   text-decoration: none;
   /*这个是外边距哦*/
-  margin: 20px;
+  margin: auto;
 }
 /*拜托一定要能行！！！*/
 /*边框和圆角弄反了呜呜呜*/
