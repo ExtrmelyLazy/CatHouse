@@ -1,3 +1,0 @@
-[build]
-  publish = "."  # 从根目录发布，而不是public文件夹
-  functions = "netlify/functions"  # 函数文件位置
