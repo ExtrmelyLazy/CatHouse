@@ -12,12 +12,22 @@
     * {
       font-family: 'fontnameragular';
     }
-  </style>
+    .fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+ </style>
   <link rel="stylesheet" type="text/css" href="style/style1.css">
   <title>实验</title>
 </head>
 <body>
-  <h1 class="basic">实验玩法</h1>
+  <h1 class="basic fade-in">实验玩法</h1>
   <p class="duanluo"><i>欢迎来到实验玩法页～本页主要测试那些尚未完善的玩法</i></p>
   <p class="duanluo"><i>本页可能会比较杂，因为想到什么就加什么</i></p>
   <p class="duanluo"><strong><i>本页不代表最终质量</i></strong></p>
