@@ -6,6 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" link="#">
   <style>
+  /* 浮入动画 */
+@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 应用于所有元素 */
+* {
+    animation: floatUp 0.6s ease-out forwards;
+}
+
+/* 可选：为不同元素设置不同的延迟 */
+*:nth-child(1) { animation-delay: 0.1s; }
+*:nth-child(2) { animation-delay: 0.2s; }
+*:nth-child(3) { animation-delay: 0.3s; }
+*:nth-child(4) { animation-delay: 0.4s; }
+*:nth-child(5) { animation-delay: 0.5s; }
   .pencil-link {
     display: inline-flex;
     align-items: center;
