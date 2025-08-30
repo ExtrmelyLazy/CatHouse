@@ -144,6 +144,7 @@
     <p>您可以选择署名或匿名两种方式</p>
     <p>署名请在标题后面加上（）</p>
     <p>例如： <i>网站维护心得（维多利亚）</i></p>
+    <p>动态发布后需要时间审核，请耐心等待。<i>审核时间可能较长（比如1天）</i></p>
 
     <form id="contact-form">
         <div class="form-group">
@@ -154,7 +155,7 @@
             <label for="message">内容:</label>
             <textarea id="message" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit">提交投稿</button>
+        <button type="submit">发布动态</button>
     </form>
 
     <p id="statusMessage"></p>
@@ -169,14 +170,14 @@
             event.preventDefault();
 
             // 显示"发送中"状态
-            statusMessage.textContent = "正在发送...";
+            statusMessage.textContent = "正在提交...";
             statusMessage.style.color = "blue";
 
             // 4. 使用 EmailJS 发送邮件
             emailjs.sendForm('service_v710e8m', 'template_px9l9cd', this) // 替换成你的Service ID和Template ID
                 .then(function() {
                     // 成功回调
-                    statusMessage.textContent = "投稿成功！感谢您的分享。";
+                    statusMessage.textContent = "提交成功！请等待审核！";
                     statusMessage.style.color = "green";
                     form.reset(); // 清空表单
                 }, function(error) {
