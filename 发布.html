@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" link="#">
+  <style>
+  .pencil-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #667eea;
+    font-family: 'Microsoft YaHei', sans-serif;
+    padding: 8px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.pencil-link:hover {
+    background: rgba(102, 126, 234, 0.2);
+    transform: translateY(-1px);
+}
+
+.pencil-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+  h1.basic {
+    border-radius: 10px ;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    color: white;
+    height: 30px;
+    width: 80%;
+    padding: 15px;
+    margin: 20px;
+    text-align: center;
+  }
+    /* 基础卡片样式 */
+        .card {
+            width: 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            margin: 0 0 12px 0;
+            color: #2c3e50;
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .card-button:hover {
+            background: #5a67d8;
+        }
+        body {
+          background: linear-gradient(135deg, #0c0c2d 0%, #1a1a4a 100%);
+        }
+  </style>
+  <title>动态</title>
+</head>
+<body>
+  <h1 class="basic">动态</h1>
+  <a href="email.html" class="pencil-link">
+    <span class="pencil-icon">✏️</span>
+    发布动态
+</a>
+  <div class="card glass-card">
+    <div class="card-content">
+        <h3>实验动态</h3>
+        <p>看看能不能正常使用</p><br>
+        <p><i>维多利亚 2025/8/30</i></p>
+    </div>
+</div>
+
+<style>
+.glass-card {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
+</body>
+</html>
