@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>流畅星光</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #0c0c2d, #1a1a4a, #2d1b69);
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            z-index: 2;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6bcb, #ffb86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .message {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #ffd700;
+            margin-top: 30px;
+        }
+        /* 性能友好的星光 */
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+            opacity: 0.3;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="signature">✨ Happy Birthday</h1>
+        <div class="message">
+            <p>星空为幕，星辰为灯，</p>
+            <p>愿你的新的一岁璀璨如银河。</p>
+            <p>每一颗星星都在为你祝福！</p>
+            <p>祝你生日快乐</p>
+        </div>
+        <div class="signature">Victoria</div>
+    </div>
+
+    <script>
+        // 创建星光（性能优化）
+        function createStars() {
+            const stars = [];
+            
+            for (let i = 0; i < 50; i++) { // 减少星星数量
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.opacity = Math.random() * 0.5 + 0.3;
+                document.body.appendChild(star);
+                stars.push(star);
+            }
+            
+            // 简单的性能保护
+            let animationRunning = true;
+            
+            // 当页面不可见时暂停动画
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    animationRunning = false;
+                } else {
+                    animationRunning = true;
+                }
+            });
+        }
+        
+        createStars();
+    </script>
+</body>
+</html>
