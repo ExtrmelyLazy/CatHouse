@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>匿名投稿箱</title>
+    <link rel="stylesheet" type="text/css" link="style/style1.css">
+    <title>投稿箱</title>
     <style>
         body { font-family: sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
         .form-group { margin-bottom: 20px; }
@@ -22,8 +23,10 @@
     </script>
 </head>
 <body>
-    <h1>匿名投稿箱</h1>
-    <p>请输入您的投稿内容，我们将完全匿名处理。</p>
+    <h1 class="basic">发布</h1>
+    <p>您可以选择署名或匿名两种方式</p>
+    <p>署名请在标题后面加上（）</p>
+    <p>例如： <i>网站维护心得（维多利亚）</i></p>
 
     <form id="contact-form">
         <div class="form-group">
@@ -31,7 +34,7 @@
             <input type="text" id="subject" name="subject">
         </div>
         <div class="form-group">
-            <label for="message">内容 *:</label>
+            <label for="message">内容:</label>
             <textarea id="message" name="message" rows="5" required></textarea>
         </div>
         <button type="submit">提交投稿</button>
