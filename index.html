@@ -15,11 +15,24 @@
     opacity: 1;
   }
 }
+
+.avatar.hover-effect {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.avatar.hover-effect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
   </style>
   <link rel="stylesheet" type="text/css" href="style/style1.css">
   <title>首页</title>
 </head>
 <body>
+  <div class="avatar hover-effect">
+    <img src="猫窝logo.png" alt="logo">
+</div>
   <h1 class="basic fade-in">欢迎来到猫窝</h1>
   <h1 class="basic fade-in"> Croeso i Gwely Cath </h1>
   <a href="wish.html" class="an">许愿墙</a>
