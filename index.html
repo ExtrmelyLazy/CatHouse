@@ -5,6 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
+     /* 导航容器 */
+        .nav-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 三横杠按钮 */
+        .hamburger-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            color: #333;
+        }
+
+        /* 菜单样式 - 在按钮正下方 */
+        .nav-menu {
+            display: none;
+            position: absolute;
+            left: 0;  /* 从按钮左边开始 */
+            top: 100%; /* 在按钮正下方 */
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .nav-menu.show {
+            display: block;
+        }
+
+        /* 菜单链接 */
+        .nav-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-menu a:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .nav-menu a:last-child {
+            border-bottom: none;
+        }
     .fade-in {
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
@@ -22,6 +73,7 @@
     overflow: hidden;
     border: 2px solid #667eea;
     display: inline-block;
+    text-align: center;
 }
 
 .logo img {
@@ -34,18 +86,26 @@
   <title>首页</title>
 </head>
 <body>
+  <!-- 导航容器 -->
+    <div class="nav-container">
+        <!-- 三横杠按钮 -->
+        <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+
+        <!-- 菜单内容 - 现在在按钮正下方 -->
+        <div class="nav-menu" id="navMenu">
+            <a href="wish.html" onclick="toggleMenu()">许愿墙</a>
+            <a href="beiwanglu.html" onclick="toggleMenu()">备忘录</a>
+            <a href="fb.html" onclick="toggleMenu()">猫窝动态</a>
+            <a href="shiyan.html" onclick="toggleMenu()">实验页</a>
+            <a href="about.html" onclick="togglemenu ()">本站站长</a>
+        </div>
+    </div>
   <div class="logo">
     <img src="猫窝logo.png" alt="logo">
 </div>
   <h1 class="basic fade-in">欢迎来到猫窝</h1>
   <h1 class="basic fade-in"> Croeso i Gwely Cath </h1>
   <p><i>本站站长：维多利亚</i></p>
-  <a href="wish.html" class="an">许愿墙</a>
-  <a href="beiwanglu.html" class="an">备忘录</a>
-  <a href="fb.html" class="an">动态</a>
-  <a href="shiyan.html" class="an">实验页</a><br>
-  <div style="height: 35px;"></div>
-  <a href="about.html" class="an">关于站长</a>
   <h2>什么是猫窝？</h2>
   <p class="duanluo">猫窝是一个交流群聊，本网站为此群而生</p>
   <h2>我要干什么？</h2>
@@ -57,5 +117,19 @@
   function myfunction(){
     document.getElementById('a').innerHTML = ('🌼🌼🌼默哀')
   }
+  function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('show');
+        }
+
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.hamburger-btn');
+            
+            if (!menu.contains(event.target) && event.target !== btn) {
+                menu.classList.remove('show');
+            }
+        });
 </script>
 </html>
