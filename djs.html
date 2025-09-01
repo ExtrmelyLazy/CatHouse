@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中考倒计时</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .exam-date {
+            font-size: 1.4rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .time-unit {
+            background: linear-gradient(145deg, #3498db, #2c3e50);
+            color: white;
+            padding: 25px 15px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .time-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .time-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 20px;
+            margin: 40px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #e74c3c, #f39c12, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+        
+        .message {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            color: #e74c3c;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            background: #ffeaa7;
+            display: inline-block;
+        }
+        
+        .tip {
+            margin-top: 25px;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .exam-date {
+                font-size: 1.1rem;
+            }
+            
+            .time-unit {
+                min-width: 90px;
+                padding: 15px 10px;
+            }
+            
+            .time-value {
+                font-size: 2.5rem;
+            }
+            
+            .time-label {
+                font-size: 0.9rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .countdown {
+                gap: 10px;
+            }
+            
+            .time-unit {
+                min-width: 70px;
+                padding: 12px 5px;
+            }
+            
+            .time-value {
+                font-size: 2rem;
+            }
+            
+            .time-label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>中考倒计时</h1>
+            <div class="exam-date">2026/6/14</div>
+            <p>QAQ我不要中考口牙</p>
+        </header>
+        
+        <div class="countdown">
+            <div class="time-unit">
+                <div class="time-value" id="days">00</div>
+                <div class="time-label">天</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="hours">00</div>
+                <div class="time-label">时</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="minutes">00</div>
+                <div class="time-label">分</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="seconds">00</div>
+                <div class="time-label">秒</div>
+            </div>
+        </div>
+        
+        <div class="progress-text">中考进度：<span id="progress-percentage">0%</span></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="message" id="message">怎么这么快就要中考了呱！</div>
+        
+        <div class="tip">啊要死要死</div>
+    </div>
+
+    <script>
+        // 设置中考日期（这里设置为2024年6月15日）
+        const examDate = new Date('2026-06-14T00:00:00');
+        
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = examDate - now;
+            
+            // 计算剩余时间
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+            // 更新显示
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // 计算进度（假设备考时间从2023年9月1日开始）
+            const startDate = new Date('2025-09-01T00:00:00');
+            const totalTime = examDate - startDate;
+            const elapsedTime = now - startDate;
+            const progress = Math.min(Math.max((elapsedTime / totalTime) * 100, 0), 100);
+            
+            // 更新进度条
+            document.getElementById('progress-bar').style.width = progress.toFixed(2) + '%';
+            document.getElementById('progress-percentage').textContent = progress.toFixed(2) + '%';
+            
+            // 根据剩余时间更新提示信息
+            const messageElement = document.getElementById('message');
+            if (days > 30) {
+                messageElement.textContent = "时间尚充裕，但请制定合理计划！";
+                messageElement.style.background = "#d4edda";
+                messageElement.style.color = "#155724";
+            } else if (days > 7) {
+                messageElement.textContent = "时间紧迫，请加强重点复习！";
+                messageElement.style.background = "#fff3cd";
+                messageElement.style.color = "#856404";
+            } else if (days > 0) {
+                messageElement.textContent = "最后冲刺阶段，保持状态！";
+                messageElement.style.background = "#f8d7da";
+                messageElement.style.color = "#721c24";
+            } else if (days === 0) {
+                messageElement.textContent = "今天是中考日，祝你考试顺利！";
+                messageElement.style.background = "#cce5ff";
+                messageElement.style.color = "#004085";
+            } else {
+                messageElement.textContent = "中考已结束，辛苦了！";
+                messageElement.style.background = "#e2e3e5";
+                messageElement.style.color = "#383d41";
+            }
+        }
+        
+        // 初始更新
+        updateCountdown();
+        
+        // 每秒更新一次
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
