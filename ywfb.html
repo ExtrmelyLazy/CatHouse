@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style/style-color.css">
+    <title>发布动态</title>
+    <!-- 1. 引入 EmailJS 的 SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // 2. 初始化你的 EmailJS 用户ID (在EmailJS后台可以找到)
+        (function() {
+            emailjs.init("jMM5m46I7TkKnzm2D"); // 替换成你的EmailJS Public Key
+        })();
+    </script>
+</head>
+<body class="dynamic-body">
+    <div class="dynamic-container">
+        <h1 class="dynamic-basic">我要许愿</h1>
+        <p class="dynamic-p">您可以选择署名或匿名两种方式</p>
+        <p class="dynamic-p">署名请在标题后面加上（）</p>
+        <p class="dynamic-p">例如： <i class="dynamic-i">我希望有人许愿（维多利亚）</i></p>
+        <p class="dynamic-p">快点许愿叭！！<i class="dynamic-i">匿名的也可以！！</i></p>
+
+        <form id="contact-form" class="dynamic-form">
+            <div class="dynamic-form-group">
+                <label for="subject" class="dynamic-label">标题（可选）:</label>
+                <input type="text" id="subject" name="subject" class="dynamic-input">
+            </div>
+            <div class="dynamic-form-group">
+                <label for="message" class="dynamic-label">内容:</label>
+                <textarea id="message" name="message" rows="5" required class="dynamic-textarea"></textarea>
+            </div>
+            <button type="submit" class="dynamic-button">我要许愿</button>
+        </form>
+
+        <p id="statusMessage" class="dynamic-status"></p>
+    </div>
+
+    <script>
+        // 3. 获取表单并监听提交事件
+        const form = document.getElementById('contact-form');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', function(event) {
+            // 阻止表单默认的提交行为
+            event.preventDefault();
+
+            // 显示"发送中"状态
+            statusMessage.textContent = "正在提交...";
+            statusMessage.style.color = "blue";
+            statusMessage.style.backgroundColor = "#f0f0f0";
+
+            // 4. 使用 EmailJS 发送邮件
+            emailjs.sendForm('service_v710e8m', 'template_px9l9cd', this) // 替换成你的Service ID和Template ID
+                .then(function() {
+                    // 成功回调
+                    statusMessage.textContent = "提交成功！请等待审核！";
+                    statusMessage.style.color = "green";
+                    statusMessage.style.backgroundColor = "#f0f0f0";
+                    form.reset(); // 清空表单
+                }, function(error) {
+                    // 失败回调
+                    statusMessage.textContent = "发送失败，请稍后再试。错误: " + JSON.stringify(error);
+                    statusMessage.style.color = "red";
+                    statusMessage.style.backgroundColor = "#f0f0f0";
+                });
+        });
+    </script>
+</body>
+</html>
