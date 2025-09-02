@@ -1,0 +1,257 @@
+body {
+  line-height: 2;
+  background-color: #a2a2a2;
+}
+h1.a {
+  display: flex;
+  align-items: center;
+  background-color: #2F2F2F;
+  font-size: 25px;
+  color: #ffffff;
+  padding: 30px;
+  width: 100%;
+  height: 50px;
+}
+p.b {
+  margin: 2px;
+  background-color: #f0f0f0;
+}
+a.c {
+  color: #22D771;
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dh {
+  width: 100%;
+  height: 60px;
+  background-color: #2c3e50;
+  display: flex;
+  justify-content: left;/*左对齐*/
+  align-items: center;/*垂直居中*/
+}
+.dhnr {
+  width: 100vh;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.dhmenu {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  align-items: center;
+}
+.dhan {
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  text-align: left;
+}
+img.tp {
+  max-width: 90%;
+  height: auto;
+  border: 1px;
+  display: block;
+}
+ .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            background: #838383;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-desc {
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #000000);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            
+        }
+ /* 无冲突样式 - 使用唯一类名前缀 */
+        .dynamic-body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .dynamic-basic {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            height: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .dynamic-p {
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .dynamic-i {
+            color: #22D771;
+            font-style: italic;
+            background: rgba(34, 215, 113, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .dynamic-form-group {
+            margin-bottom: 25px;
+        }
+
+        .dynamic-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .dynamic-input, .dynamic-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dce1e8;
+            border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+            box-sizing: border-box;
+        }
+
+        .dynamic-input:focus, .dynamic-textarea:focus {
+            outline: none;
+            border-color: #22D771;
+            box-shadow: 0 0 0 3px rgba(34, 215, 113, 0.1);
+        }
+
+        .dynamic-button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .dynamic-button:hover {
+            background-color: #22D771;
+        }
+
+        .dynamic-status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .dynamic-body {
+                margin: 20px auto;
+                padding: 15px;
+            }
+            
+            .dynamic-basic {
+                font-size: 1.8em;
+                padding: 20px;
+            }
+            
+            .dynamic-input, .dynamic-textarea {
+                padding: 10px 12px;
+            }
+            
+            .dynamic-button {
+                padding: 12px 20px;
+            }
+        }
+
+        /* 表单容器美化 */
+        .dynamic-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .dynamic-container {
+            max-width: 100%;
+        }
+  .an2 {
+    color: #22D771;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
