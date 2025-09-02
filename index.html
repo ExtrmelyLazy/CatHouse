@@ -23,6 +23,12 @@
   </nav>
   <h1 class="a">猫窝官方网站</h1>
   <h1 id="welsh-greeting" class="a">Loading...</h1>
+  <p>上方威尔士语英文对照
+  <li>Bore da=Good morning=早安</li>
+  <li>Prynhawn da=Good afternoon=下午好</li>
+  <li>Noswaith dda=Good evening=晚上好</li>
+  <li>Nos da=Good night=晚安</li>
+  </p>
   <div style="height: 40px; font-size: 30px; margin: 30px; text-align: center;">广告位招租</div>
   <h2>beta版更新！</h2>
   <p>是的，我更新了UI界面，让猫窝网站变得简约低调质朴。（其实是因为这样风格比较好管理，比较统一低调，而且也可以加上一些其他的板块，反正就是好处多多，丑也没办法）</p>
@@ -36,4 +42,29 @@
                 <p class="card-desc"><i>2025/9/2</i></p>
             </div>
 </body>
+<script>
+function updateWelshGreeting() {
+    const now = new Date();
+    const hours = now.getHours();
+    let greeting = "";
+    
+    if (hours >= 5 && hours < 12) {
+        greeting = "Bore da"; // 早上 (5:00-11:59)
+    } else if (hours >= 12 && hours < 18) {
+        greeting = "Prynhawn da"; // 下午 (12:00-17:59)
+    } else if (hours >= 18 && hours < 22) {
+        greeting = "Noswaith dda"; // 傍晚 (18:00-21:59)
+    } else {
+        greeting = "Nos da"; // 晚上/夜间 (22:00-4:59)
+    }
+    
+    document.getElementById("welsh-greeting").textContent = greeting;
+}
+
+// 页面加载时立即更新
+updateWelshGreeting();
+
+// 每分钟更新一次，确保问候语保持最新
+setInterval(updateWelshGreeting, 60000);
+</script>
 </html>
