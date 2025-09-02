@@ -1,137 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style/style-color.css">
   <style>
-     /* 导航容器 */
-        .nav-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* 三横杠按钮 */
-        .hamburger-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 10px;
-            color: #333;
-        }
-
-        /* 菜单样式 - 在按钮正下方 */
-        .nav-menu {
-            display: none;
-            position: absolute;
-            left: 0;  /* 从按钮左边开始 */
-            top: 100%; /* 在按钮正下方 */
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            min-width: 150px;
-            z-index: 1000;
-        }
-
-        .nav-menu.show {
-            display: block;
-        }
-
-        /* 菜单链接 */
-        .nav-menu a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #eee;
-        }
-
-        .nav-menu a:hover {
-            background: #f8f9fa;
-            color: #667eea;
-        }
-
-        .nav-menu a:last-child {
-            border-bottom: none;
-        }
-    .fade-in {
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-.logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #667eea;
-    display: flex;
-    text-align: center;
-    margin: auto;
-}
-
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+  
   </style>
-  <link rel="stylesheet" type="text/css" href="style/style1.css">
   <title>首页</title>
 </head>
 <body>
-  <!-- 导航容器 -->
-    <div class="nav-container">
-        <!-- 三横杠按钮 -->
-        <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
-
-        <!-- 菜单内容 - 现在在按钮正下方 -->
-        <div class="nav-menu" id="navMenu">
-            <a href="wish.html" onclick="toggleMenu()">许愿墙</a>
-            <a href="beiwanglu.html" onclick="toggleMenu()">备忘录</a>
-            <a href="fb.html" onclick="toggleMenu()">猫窝动态</a>
-            <a href="shiyan.html" onclick="toggleMenu()">实验页</a>
-            <a href="about.html" onclick="togglemenu ()">本站站长</a>
-            <a href="djs.html" onclick="togglemenu ()">？中考了？</a>
-        </div>
+  <nav class="dh">
+    <div class="dhbr">
+      <ul class="dhmenu">
+        <li class="dhan"><a href="index.html" class="dhan">首页</a></li>
+        <li class="dhan"><a href="dt.html" class="dhan">动态</a></li>
+        <li class="dhan"><a href="xyq.html" class="dhan">许愿墙</a></li>
+      </ul>
     </div>
-  <div class="logo">
-    <img src="猫窝logo.png" alt="logo">
-</div>
-  <h1 class="basic fade-in">欢迎来到猫窝</h1>
-  <h1 class="basic fade-in"> Croeso i Gwely Cath </h1>
-  <p><i>本站站长：维多利亚</i></p>
-  <h2>什么是猫窝？</h2>
-  <p class="duanluo">猫窝是一个交流群聊，本网站为此群而生</p>
-  <h2>我要干什么？</h2>
-  <p class="duanluo">你可以自由浏览网站的各个地方，如果你有意愿投稿，欢迎！</p>
-  <h2>你这网站怎么这么鸡肋</h2>
-  <p class="duanluo">绝对不是我不会(可能有一点不会)，而是条件不允许</p>
+  </nav>
+  <h1 class="a">猫窝官方网站</h1>
+  <div style="height: 40px; font-size: 30px; margin: 30px; text-align: center;">广告位招租</div>
+  <h2>beta版更新！</h2>
+  <p>猫窝beta版隆重发布！我们更新了UI界面，让猫窝网站变得简约低调质朴。</p>
+  <h2>猫窝要闻</h2>
+  <div class="cards-container">
+            <!-- 卡片1：文章 -->
+            <div class="card" onclick="#">
+                <div class="card-icon"></div>
+                <h2 class="card-title">UI大改？</h2>
+                <p class="card-desc">猫窝beta更新，纯手写UI</p>
+                <p class="card-desc"><i>2025/9/2</i></p>
+            </div>
 </body>
-<script>
-  function myfunction(){
-    document.getElementById('a').innerHTML = ('🌼🌼🌼默哀')
-  }
-  function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('show');
-        }
-
-        // 点击页面其他区域关闭菜单
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('navMenu');
-            const btn = document.querySelector('.hamburger-btn');
-            
-            if (!menu.contains(event.target) && event.target !== btn) {
-                menu.classList.remove('show');
-            }
-        });
-</script>
 </html>
