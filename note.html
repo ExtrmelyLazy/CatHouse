@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>记事本</title>
   <link rel="stylesheet" type="text/css" href="style/style-color.css">
   <style>
@@ -17,13 +18,14 @@
       background-color: #a2a2a2;
       margin: 0;
       padding: 20px;
+      min-height: 100vh;
     }
     
     .container {
       max-width: 600px;
-      margin: 40px auto;
+      margin: 20px auto;
       background: #fff;
-      padding: 24px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
@@ -36,7 +38,7 @@
       background-color: #2F2F2F;
       font-size: 25px;
       color: #ffffff;
-      padding: 30px;
+      padding: 20px;
       width: 100%;
       height: auto;
       margin-bottom: 20px;
@@ -45,8 +47,8 @@
     
     h2 {
       font-size: 20px;
-      padding: 20px;
-      margin-top: 30px;
+      padding: 15px;
+      margin-top: 25px;
     }
     
     .note-input {
@@ -58,7 +60,7 @@
     textarea {
       width: 100%;
       height: 80px;
-      padding: 8px;
+      padding: 10px;
       resize: vertical;
       font-size: 16px;
       border-radius: 4px;
@@ -80,15 +82,23 @@
       border: 1px solid #eee;
     }
     
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
     button {
-      padding: 8px 16px;
+      padding: 10px 16px;
       border: none;
       background: #2c3e50;
       color: #fff;
       border-radius: 4px;
       cursor: pointer;
-      margin-right: 8px;
       transition: all 0.3s ease;
+      flex: 1;
+      min-width: 120px;
     }
     
     button:hover {
@@ -104,22 +114,24 @@
     .note-item {
       background: #f0f0f0;
       border-radius: 4px;
-      padding: 12px;
-      margin-bottom: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
       position: relative;
     }
     
     .note-text {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       white-space: pre-wrap;
-      word-break: break-all;
+      word-break: break-word;
       color: #2c3e50;
+      padding-right: 100px;
     }
     
     .note-images {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     
     .note-images img {
@@ -131,8 +143,8 @@
     
     .note-actions {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 15px;
+      right: 15px;
       display: flex;
       gap: 6px;
     }
@@ -140,9 +152,11 @@
     .note-actions button {
       background: #e2e6ea;
       color: #2c3e50;
-      padding: 4px 10px;
+      padding: 5px 10px;
       font-size: 13px;
       margin: 0;
+      min-width: auto;
+      flex: none;
     }
     
     .note-actions button:hover {
@@ -156,6 +170,113 @@
       background-color: #f0f0f0;
       border-radius: 4px;
       border: 1px solid #ddd;
+      width: 100%;
+    }
+    
+    .an2 {
+      display: inline-block;
+      color: #22D771;
+      text-decoration: none;
+      margin-bottom: 15px;
+      padding: 8px 15px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .an2:hover {
+      background-color: #22D771;
+      color: white;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px auto;
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 22px;
+        padding: 15px;
+      }
+      
+      h2 {
+        font-size: 18px;
+        padding: 12px;
+      }
+      
+      .note-item {
+        padding: 12px;
+      }
+      
+      .note-text {
+        padding-right: 90px;
+      }
+      
+      .note-actions {
+        top: 12px;
+        right: 12px;
+      }
+      
+      .note-actions button {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+      
+      .note-images img {
+        max-width: 80px;
+        max-height: 80px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 12px;
+      }
+      
+      h1 {
+        font-size: 20px;
+        padding: 12px;
+      }
+      
+      h2 {
+        font-size: 16px;
+        padding: 10px;
+      }
+      
+      textarea {
+        height: 70px;
+        font-size: 15px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+      }
+      
+      button {
+        min-width: 100%;
+      }
+      
+      .note-text {
+        padding-right: 0;
+        margin-bottom: 40px;
+      }
+      
+      .note-actions {
+        position: static;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+      
+      .note-images img {
+        max-width: 70px;
+        max-height: 70px;
+      }
     }
   </style>
 </head>
@@ -167,9 +288,11 @@
       <textarea id="noteText" placeholder="输入你的笔记..."></textarea>
       <input type="file" id="imageInput" accept="image/*" multiple>
       <div id="imagePreview"></div>
-      <button id="saveBtn">保存</button>
-      <div style="height: 5px;"></div>
-      <button id="clearBtn">清空</button>
+      <div class="button-group">
+        <button id="saveBtn">保存</button>
+        <div style="height: 5px;"></div>
+        <button id="clearBtn">清空</button>
+      </div>
     </div>
     <h2>我的笔记</h2>
     <ul id="notesList"></ul>
