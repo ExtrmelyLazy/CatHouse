@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>记事本</title>
+  <link rel="stylesheet" type="text/css" href="style/style-color.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "微软雅黑", Arial, sans-serif;
+      line-height: 2;
+      background-color: #a2a2a2;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    
+    h1, h2 {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #2F2F2F;
+      font-size: 25px;
+      color: #ffffff;
+      padding: 30px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    
+    .note-input {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 8px;
+      resize: vertical;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background-color: #f0f0f0;
+    }
+    
+    #imagePreview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    
+    #imagePreview img {
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    
+    button {
+      padding: 8px 16px;
+      border: none;
+      background: #2c3e50;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    button:hover {
+      background: #22D771;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 16px;
+    }
+    
+    .note-item {
+      background: #f0f0f0;
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    
+    .note-text {
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #2c3e50;
+    }
+    
+    .note-images {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .note-images img {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    
+    .note-actions {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      gap: 6px;
+    }
+    
+    .note-actions button {
+      background: #e2e6ea;
+      color: #2c3e50;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin: 0;
+    }
+    
+    .note-actions button:hover {
+      background: #22D771;
+      color: white;
+    }
+    
+    input[type="file"] {
+      margin: 10px 0;
+      padding: 8px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>记事本</h1>
+    <a class="an2" href="index.html">回到首页</a>
+    <div class="note-input">
+      <textarea id="noteText" placeholder="输入你的笔记..."></textarea>
+      <input type="file" id="imageInput" accept="image/*" multiple>
+      <div id="imagePreview"></div>
+      <button id="saveBtn">保存</button>
+      <div style="height: 5px;"></div>
+      <button id="clearBtn">清空</button>
+    </div>
+    <h2>我的笔记</h2>
+    <ul id="notesList"></ul>
+  </div>
+  <script>
+    let notes = [];
+    let editId = null;
+    let imageFiles = [];
+
+    const noteText = document.getElementById('noteText');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const saveBtn = document.getElementById('saveBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const notesList = document.getElementById('notesList');
+
+    function uuid() {
+      return Date.now().toString() + Math.random().toString(36).substr(2, 7);
+    }
+
+    function loadNotes() {
+      const data = localStorage.getItem('notes');
+      notes = data ? JSON.parse(data) : [];
+    }
+
+    function saveNotes() {
+      localStorage.setItem('notes', JSON.stringify(notes));
+    }
+
+    function renderNotes() {
+      notesList.innerHTML = '';
+      notes.slice().reverse().forEach(note => {
+        const li = document.createElement('li');
+        li.className = 'note-item';
+
+        const textDiv = document.createElement('div');
+        textDiv.className = 'note-text';
+        textDiv.textContent = note.text;
+        li.appendChild(textDiv);
+
+        if (note.images && note.images.length > 0) {
+          const imagesDiv = document.createElement('div');
+          imagesDiv.className = 'note-images';
+          note.images.forEach(imgBase64 => {
+            const img = document.createElement('img');
+            img.src = imgBase64;
+            imagesDiv.appendChild(img);
+          });
+          li.appendChild(imagesDiv);
+        }
+
+        // 操作按钮
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'note-actions';
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = '编辑';
+        editBtn.onclick = () => editNote(note.id);
+        actionsDiv.appendChild(editBtn);
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '删除';
+        delBtn.onclick = () => deleteNote(note.id);
+        actionsDiv.appendChild(delBtn);
+
+        li.appendChild(actionsDiv);
+
+        notesList.appendChild(li);
+      });
+    }
+
+    // 预览图片
+    function renderImagePreview() {
+      imagePreview.innerHTML = '';
+      imageFiles.forEach(file => {
+        const img = document.createElement('img');
+        img.src = file;
+        imagePreview.appendChild(img);
+      });
+    }
+
+    // 处理图片上传
+    imageInput.addEventListener('change', function() {
+      const files = Array.from(this.files);
+      imageFiles = [];
+      if (files.length === 0) {
+        renderImagePreview();
+        return;
+      }
+
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageFiles.push(e.target.result);
+          loaded++;
+          if (loaded === files.length) {
+            renderImagePreview();
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // 保存或更新笔记
+    saveBtn.onclick = function() {
+      const text = noteText.value.trim();
+      if (!text && imageFiles.length === 0) {
+        alert('请输入内容或上传图片');
+        return;
+      }
+      if (editId) {
+        const idx = notes.findIndex(n => n.id === editId);
+        if (idx > -1) {
+          notes[idx].text = text;
+          notes[idx].images = imageFiles.slice();
+        }
+        editId = null;
+      } else {
+        notes.push({
+          id: uuid(),
+          text,
+          images: imageFiles.slice()
+        });
+      }
+      saveNotes();
+      renderNotes();
+      clearInput();
+    };
+
+    // 清空输入框
+    clearBtn.onclick = function() {
+      clearInput();
+    };
+
+    function clearInput() {
+      noteText.value = '';
+      imageInput.value = '';
+      imageFiles = [];
+      renderImagePreview();
+      editId = null;
+    }
+
+    // 编辑笔记
+    function editNote(id) {
+      const note = notes.find(n => n.id === id);
+      if (note) {
+        noteText.value = note.text;
+        imageFiles = note.images.slice();
+        renderImagePreview();
+        editId = id;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // 删除笔记
+    function deleteNote(id) {
+      if (confirm('确定要删除吗？')) {
+        notes = notes.filter(n => n.id !== id);
+        saveNotes();
+        renderNotes();
+      }
+    }
+
+    // 初始化
+    loadNotes();
+    renderNotes();
+  </script>
+</body>
+</html>
