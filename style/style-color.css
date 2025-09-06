@@ -271,3 +271,17 @@ img.tp {
   position: relative;
   overflow: hidden;
 }
+.link {
+    display: inline-block;
+    color: #22D771;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid #22D771;
+    padding: 4px 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    line-height: 1.4;
+}
